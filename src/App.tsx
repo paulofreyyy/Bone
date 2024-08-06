@@ -1,24 +1,22 @@
-// src/App.js
 import { useState } from 'react';
 import { Sidebar } from './components/Sidebar';
+import { Dashboard } from './components/Dashboard';
+import { Box } from '@mui/material';
 
 const App: React.FC = () => {
-  const [isDrawerOpen, setDrawerOpen] = useState(true);
+    const [isOpen, setIsOpen] = useState(true);
 
-  const toggleDrawer = () => {
-    setDrawerOpen(!isDrawerOpen);
-  };
+    const toggleDrawer = () => {
+        setIsOpen(!isOpen);
+    };
 
-  return (
-    <div style={{display: 'flex'}}>
-        <Sidebar isOpen={isDrawerOpen} toggleDrawer={toggleDrawer} />
+    return (
+        <Box sx={{ display: 'flex', bgcolor: "#f0f0f0", height: '100vh' }}>
+            <Sidebar isOpen={isOpen} toggleDrawer={toggleDrawer} />
 
-        <div style={{ marginLeft: isDrawerOpen ? 240 : 60, padding: 20, flexGrow: 1, backgroundColor: 'red' }}>
-            <h1>Dashboard Content</h1>
-            <p>Teste</p>
-        </div>
-    </div>
-  );
+            <Dashboard />
+        </Box>
+    );
 };
 
 export default App;
