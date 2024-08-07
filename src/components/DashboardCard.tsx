@@ -13,7 +13,7 @@ export const DashboardCard: React.FC<dashboardCardProps> = ({ title, cardValue, 
                 background: background,
                 color: "white",
                 padding: '50px',
-                borderRadius: '12px',
+                borderRadius: '8px',
                 direction: "column"
             }}
         >

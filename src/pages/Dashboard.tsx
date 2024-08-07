@@ -3,6 +3,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import { DashboardCard } from "../components/DashboardCard";
 import { useState } from "react";
 import { Sidebar } from "../components/Sidebar";
+import { DashboardCharts } from "../components/DashboardCharts";
 
 export const Dashboard = () => {
     const [isOpen, setIsOpen] = useState(true);
@@ -10,6 +11,7 @@ export const Dashboard = () => {
     const toggleDrawer = () => {
         setIsOpen(!isOpen);
     };
+
     return (
 
         <Box
@@ -62,6 +64,9 @@ export const Dashboard = () => {
                             cardValue={999}
                             title="Saldo estimado"
                         />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <DashboardCharts />
                     </Grid>
                 </Grid>
             </Container>
