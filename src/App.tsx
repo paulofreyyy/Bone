@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Sidebar } from './components/Sidebar';
-import { Dashboard } from './components/Dashboard';
+import { Dashboard } from './pages/Dashboard';
 import { Box } from '@mui/material';
 
 const App: React.FC = () => {

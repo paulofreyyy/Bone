@@ -1,6 +1,6 @@
 import { Box, Container, Grid, Typography } from "@mui/material"
 import HomeIcon from '@mui/icons-material/Home';
-import { DashboardCard } from "./DashboardCard";
+import { DashboardCard } from "../components/DashboardCard";
 
 export const Dashboard = () => {
     return (
