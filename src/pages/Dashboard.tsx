@@ -65,6 +65,7 @@ export const Dashboard = () => {
                             title="Saldo estimado"
                         />
                     </Grid>
+
                     <Grid item xs={12}>
                         <DashboardCharts />
                     </Grid>

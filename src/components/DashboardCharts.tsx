@@ -1,5 +1,6 @@
+import React from "react";
 import { Box, Grid } from "@mui/material";
-import { Bar, Doughnut } from "react-chartjs-2";
+import { Doughnut } from "react-chartjs-2";
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -10,6 +11,9 @@ import {
     Tooltip,
     Legend,
 } from 'chart.js';
+import { BarChart } from "./charts/BarChart";
+import { useFetchContas } from "../utils/Contas.hook";
+
 
 // Registro dos componentes do ChartJS
 ChartJS.register(
@@ -22,66 +26,46 @@ ChartJS.register(
     Legend
 );
 
-// Dados e opções para o gráfico de barras
-const barData = {
-    labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho'],
-    datasets: [
-        {
-            label: 'Despesas',
-            data: [300, 500, 100, 200, 300, 400, 200],
+export const DashboardCharts: React.FC = () => {
+    const doughnutData = {
+        labels: ['Red', 'Blue', 'Yellow'],
+        datasets: [{
+            label: 'Despesas por categoria',
+            data: [300, 50, 100],
             backgroundColor: [
                 '#FEB692',
                 '#CE9FFC',
+                '#90F7EC'
             ],
+            hoverOffset: 4,
+        }],
+    };
+
+    const doughnutOptions = {
+        plugins: {
+            title: {
+                display: true,
+                text: 'Despesas por categoria',
+            },
         },
-    ],
-};
+    };
 
-const barOptions = {
-    plugins: {
-        title: {
-            display: true,
-            text: 'Despesas mensais',
-        },
-    },
-};
+    const { contas, error } = useFetchContas();
+    if (error) {
+        return <div>{error}</div>;
+    }
 
-// Dados e opções para o gráfico de rosquinhas
-const doughnutData = {
-    labels: ['Red', 'Blue', 'Yellow'],
-    datasets: [{
-        label: 'Despesas por categoria',
-        data: [300, 50, 100],
-        backgroundColor: [
-            '#FEB692',
-            '#CE9FFC',
-            '#90F7EC'
-        ],
-        hoverOffset: 4,
-    }],
-};
+    return (
+        <Grid container spacing={5}>
+            <Grid item xs={8}>
+                <BarChart contas={contas} />
+            </Grid>
 
-const doughnutOptions = {
-    plugins: {
-        title: {
-            display: true,
-            text: 'Despesas por categoria',
-        },
-    },
-};
-
-export const DashboardCharts = () => (
-    <Grid container spacing={5}>
-        <Grid item xs={8}>
-            <Box sx={{ background: "white", padding: '20px', borderRadius: '8px' }}>
-                <Bar data={barData} options={barOptions} />
-            </Box>
+            <Grid item xs={4}>
+                <Box sx={{ background: "white", padding: '20px', borderRadius: '8px' }}>
+                    <Doughnut data={doughnutData} options={doughnutOptions} />
+                </Box>
+            </Grid>
         </Grid>
-
-        <Grid item xs={4}>
-            <Box sx={{ background: "white", padding: '20px', borderRadius: '8px' }}>
-                <Doughnut data={doughnutData} options={doughnutOptions} />
-            </Box>
-        </Grid>
-    </Grid>
-);
+    );
+};
