@@ -1,5 +1,5 @@
-import { Box, Grid } from "@mui/material"
-import { Bar, Doughnut } from "react-chartjs-2"
+import { Box, Grid } from "@mui/material";
+import { Bar, Doughnut } from "react-chartjs-2";
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -11,6 +11,7 @@ import {
     Legend,
 } from 'chart.js';
 
+// Registro dos componentes do ChartJS
 ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -21,54 +22,66 @@ ChartJS.register(
     Legend
 );
 
-export const DashboardCharts = () => {
-    //ChartJS data
-    const data = {
-        labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho'],
-        datasets: [
-            {
-                label: 'Expenses',
-                data: [300, 500, 100, 200, 300, 400, 200],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(255, 159, 64, 1)',
-                ],
-            },
-
-        ],
-    }
-
-    const dataDoughnut = {
-        labels: [
-            'Red',
-            'Blue',
-            'Yellow'
-        ],
-        datasets: [{
-            label: 'My First Dataset',
-            data: [300, 50, 100],
+// Dados e opções para o gráfico de barras
+const barData = {
+    labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho'],
+    datasets: [
+        {
+            label: 'Despesas',
+            data: [300, 500, 100, 200, 300, 400, 200],
             backgroundColor: [
-                'rgb(255, 99, 132)',
-                'rgb(54, 162, 235)',
-                'rgb(255, 205, 86)'
+                '#FEB692',
+                '#CE9FFC',
             ],
-            hoverOffset: 4
-        }]
-    };
+        },
+    ],
+};
 
-    return (
-        <Grid container spacing={5}>
-            <Grid item xs={8}>
-                <Box sx={{ background: "white", padding: '20px', borderRadius: '8px' }}>
-                    <Bar data={data} />
-                </Box>
-            </Grid>
+const barOptions = {
+    plugins: {
+        title: {
+            display: true,
+            text: 'Despesas mensais',
+        },
+    },
+};
 
-            <Grid item xs={4}>
-                <Box sx={{ background: "white", padding: '20px', borderRadius: '8px' }}>
-                    <Doughnut data={dataDoughnut} />
-                </Box>
-            </Grid>
+// Dados e opções para o gráfico de rosquinhas
+const doughnutData = {
+    labels: ['Red', 'Blue', 'Yellow'],
+    datasets: [{
+        label: 'Despesas por categoria',
+        data: [300, 50, 100],
+        backgroundColor: [
+            '#FEB692',
+            '#CE9FFC',
+            '#90F7EC'
+        ],
+        hoverOffset: 4,
+    }],
+};
+
+const doughnutOptions = {
+    plugins: {
+        title: {
+            display: true,
+            text: 'Despesas por categoria',
+        },
+    },
+};
+
+export const DashboardCharts = () => (
+    <Grid container spacing={5}>
+        <Grid item xs={8}>
+            <Box sx={{ background: "white", padding: '20px', borderRadius: '8px' }}>
+                <Bar data={barData} options={barOptions} />
+            </Box>
         </Grid>
-    )
-}
+
+        <Grid item xs={4}>
+            <Box sx={{ background: "white", padding: '20px', borderRadius: '8px' }}>
+                <Doughnut data={doughnutData} options={doughnutOptions} />
+            </Box>
+        </Grid>
+    </Grid>
+);

@@ -46,7 +46,7 @@ export const Dashboard = () => {
                         <DashboardCard
                             background="linear-gradient( 135deg, #FEB692 10%, #EA5455 100%)"
                             cardValue={999}
-                            title="Despesas mensais"
+                            title="Despesas no mês atual"
                         />
                     </Grid>
 
