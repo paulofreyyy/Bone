@@ -18,7 +18,7 @@ export const DashboardCard: React.FC<dashboardCardProps> = ({ title, cardValue, 
             }}
         >
             <Typography variant="h5" mb={2}>{title}</Typography>
-            <Typography variant="h4" fontWeight={'bold'}>{`R$ ${cardValue.toFixed(2)}`}</Typography>
+            <Typography variant="h4" fontWeight={'bold'}>{`R$ ${cardValue.toFixed(2).replace('.', ',')}`}</Typography>
         </Box>
     )
 }

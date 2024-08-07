@@ -1,6 +1,5 @@
 import { Box, Container, Grid, Typography } from "@mui/material"
 import HomeIcon from '@mui/icons-material/Home';
-import { DashboardCard } from "../components/DashboardCard";
 import { useState } from "react";
 import { Sidebar } from "../components/Sidebar";
 import { DashboardCharts } from "../components/DashboardCharts";
@@ -11,6 +10,7 @@ export const Dashboard = () => {
     const toggleDrawer = () => {
         setIsOpen(!isOpen);
     };
+
 
     return (
 
@@ -40,30 +40,6 @@ export const Dashboard = () => {
                             }} />
                             <Typography variant='h5' sx={{ fontWeight: 'bold', ml: '15px' }}>Dashboard</Typography>
                         </Box>
-                    </Grid>
-
-                    <Grid item xs={4}>
-                        <DashboardCard
-                            background="linear-gradient( 135deg, #FEB692 10%, #EA5455 100%)"
-                            cardValue={999}
-                            title="Despesas no mês atual"
-                        />
-                    </Grid>
-
-                    <Grid item xs={4}>
-                        <DashboardCard
-                            background="linear-gradient( 135deg, #CE9FFC 10%, #7367F0 100%)"
-                            cardValue={999}
-                            title="Recebimento estimado"
-                        />
-                    </Grid>
-
-                    <Grid item xs={4}>
-                        <DashboardCard
-                            background="linear-gradient( 135deg, #90F7EC 10%, #32CCBC 100%)"
-                            cardValue={999}
-                            title="Saldo estimado"
-                        />
                     </Grid>
 
                     <Grid item xs={12}>

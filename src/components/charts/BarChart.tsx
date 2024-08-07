@@ -30,7 +30,7 @@ export const BarChart: React.FC<BarChartProps> = ({ contas }) => {
         datasets: [{
             label: 'Despesas',
             data,
-            backgroundColor: '#FEB692'
+            backgroundColor: ['#FEB692', '#CE9FFC']
         }]
     };
 
