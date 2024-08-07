@@ -42,6 +42,7 @@ export const Dashboard = () => {
                         </Box>
                     </Grid>
 
+                    {/* Cards e gráficos */}
                     <Grid item xs={12}>
                         <DashboardCharts />
                     </Grid>

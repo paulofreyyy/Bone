@@ -14,6 +14,7 @@ import { BarChart } from "./charts/BarChart";
 import { useFetchContas } from "../utils/Contas.hook";
 import { DoughnutChart } from "./charts/DoughnutChart";
 import { DashboardCard } from "./DashboardCard";
+import { DashboardTable } from "./DashboardTable";
 
 
 // Registro dos componentes do ChartJS
@@ -72,6 +73,11 @@ export const DashboardCharts: React.FC = () => {
 
             <Grid item xs={4}>
                 <DoughnutChart />
+            </Grid>
+
+            {/* Table */}
+            <Grid item xs={12}>
+                <DashboardTable contas={contas} />
             </Grid>
         </Grid>
     );
