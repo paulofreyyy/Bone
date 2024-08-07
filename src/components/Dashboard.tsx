@@ -1,5 +1,6 @@
 import { Box, Container, Grid, Typography } from "@mui/material"
 import HomeIcon from '@mui/icons-material/Home';
+import { DashboardCard } from "./DashboardCard";
 
 export const Dashboard = () => {
     return (
@@ -29,57 +30,27 @@ export const Dashboard = () => {
                     </Grid>
 
                     <Grid item xs={4}>
-                        <Grid
-                            container
-                            gap={2}
-                            color={'white'}
-                            p={'60px'}
-                            direction={'column'}
-                            borderRadius={3}
-                            sx={{
-                                background: "linear-gradient( 135deg, #FEB692 10%, #EA5455 100%)"
-                            }}
-                        >
-                            <Typography variant="h5">Despesas mensais</Typography>
-                            <Typography variant="h4" fontWeight={'bold'}>R$ 999,99</Typography>
-                            <Typography variant="h5" mt={5}>.....</Typography>
-                        </Grid>
+                        <DashboardCard
+                            background="linear-gradient( 135deg, #FEB692 10%, #EA5455 100%)"
+                            cardValue={999}
+                            title="Despesas mensais"
+                        />
                     </Grid>
 
                     <Grid item xs={4}>
-                        <Grid
-                            container
-                            gap={2}
-                            color={'white'}
-                            p={'60px'}
-                            direction={'column'}
-                            borderRadius={3}
-                            sx={{
-                                background: "linear-gradient( 135deg, #CE9FFC 10%, #7367F0 100%)"
-                            }}
-                        >
-                            <Typography variant="h5">Recebimento estimado</Typography>
-                            <Typography variant="h4" fontWeight={'bold'}>R$ 999,99</Typography>
-                            <Typography variant="h5" mt={5}>.....</Typography>
-                        </Grid>
+                        <DashboardCard
+                            background="linear-gradient( 135deg, #CE9FFC 10%, #7367F0 100%)"
+                            cardValue={999}
+                            title="Recebimento estimado"
+                        />
                     </Grid>
 
                     <Grid item xs={4}>
-                        <Grid
-                            container
-                            gap={2}
-                            color={'white'}
-                            p={'60px'}
-                            direction={'column'}
-                            borderRadius={3}
-                            sx={{
-                                background: " linear-gradient( 135deg, #90F7EC 10%, #32CCBC 100%)"
-                            }}
-                        >
-                            <Typography variant="h5">Saldo estimado</Typography>
-                            <Typography variant="h4" fontWeight={'bold'}>R$ 999,99</Typography>
-                            <Typography variant="h5" mt={5}>.....</Typography>
-                        </Grid>
+                        <DashboardCard
+                            background="linear-gradient( 135deg, #90F7EC 10%, #32CCBC 100%)"
+                            cardValue={999}
+                            title="Saldo estimado"
+                        />
                     </Grid>
                 </Grid>
             </Container>
