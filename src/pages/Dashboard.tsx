@@ -1,17 +1,28 @@
 import { Box, Container, Grid, Typography } from "@mui/material"
 import HomeIcon from '@mui/icons-material/Home';
 import { DashboardCard } from "../components/DashboardCard";
+import { useState } from "react";
+import { Sidebar } from "../components/Sidebar";
 
 export const Dashboard = () => {
+    const [isOpen, setIsOpen] = useState(true);
+
+    const toggleDrawer = () => {
+        setIsOpen(!isOpen);
+    };
     return (
+
         <Box
             component="main"
             sx={{
                 flexGrow: 1,
                 p: 3,
                 marginTop: "100px",
+                display: "flex",
             }}
         >
+            <Sidebar isOpen={isOpen} toggleDrawer={toggleDrawer} />
+
             <Container maxWidth='xl'>
                 <Grid container spacing={5}>
                     <Grid item xs={12}>
