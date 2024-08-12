@@ -40,13 +40,15 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleDrawer }) => {
                 sx={{
                     zIndex: (theme) => theme.zIndex.drawer + 1,
                     marginLeft: isOpen ? drawerWidth : 0,
-                    width: isOpen ? `calc(100% - ${drawerWidth}px)` : '100%'
+                    width: isOpen ? `calc(100% - ${drawerWidth}px)` : '100%',
                 }}
+                elevation={0}
             >
-                <Toolbar sx={{ pr: '24px' }}>
+                <Toolbar sx={{
+                    bgcolor: 'white',
+                }}>
                     <IconButton
                         edge="start"
-                        color="inherit"
                         aria-label="open drawer"
                         onClick={toggleDrawer}
                         sx={{ marginRight: '36px' }}
@@ -54,18 +56,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleDrawer }) => {
                         <MenuIcon />
                     </IconButton>
 
-                    <Typography
-                        component="h1"
-                        variant="h6"
-                        color="inherit"
-                        noWrap
-                        sx={{ flexGrow: 1 }}
-                    >
-                        Bone
-                    </Typography>
-
-                    <IconButton color="inherit">
-                        <Badge badgeContent={4} color="secondary">
+                    <IconButton sx={{ ml: 'auto' }}>
+                        <Badge badgeContent={1} color="secondary">
                             <NotificationsIcon />
                         </Badge>
                     </IconButton>
@@ -81,11 +73,24 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleDrawer }) => {
                     [`& .MuiDrawer-paper`]: {
                         width: drawerWidth,
                         boxSizing: 'border-box',
-                        transition: 'width 0.3s'
-                    }
+                        transition: 'width 0.3s',
+                        border: "none",
+                    },
                 }}
-            >
-                <Toolbar />
+            >   
+                <Typography
+                    textAlign={'center'}
+                    color='#8325db'
+                    fontWeight='bold'
+                    variant='h5'
+                    p={2}
+                >
+                    BONE
+                </Typography>
+
+                {/* <Divider /> */}
+
+
                 <Box sx={{ overflow: 'auto' }}>
                     <List>
                         {items.map((item, index) => (
