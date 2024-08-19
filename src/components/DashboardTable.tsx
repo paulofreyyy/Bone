@@ -1,5 +1,6 @@
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow } from "@mui/material"
 import { useState } from "react";
+import { FormattedNumber, IntlProvider } from "react-intl";
 
 interface Conta {
     id: number;
@@ -47,7 +48,11 @@ export const DashboardTable: React.FC<DashboardTableProps> = ({ contas }) => {
                             <TableRow key={conta.id}>
                                 <TableCell>{conta.id}</TableCell>
                                 <TableCell>{conta.descricao}</TableCell>
-                                <TableCell>{conta.valor}</TableCell>
+                                <TableCell>
+                                    <IntlProvider locale="pt-BR">
+                                        <FormattedNumber value={Number(conta.valor)} style="currency" currency="BRL" />
+                                    </IntlProvider>
+                                </TableCell>
                                 <TableCell>{conta.vencimento}</TableCell>
                                 <TableCell>{conta.pagoEm ? conta.pagoEm : 'Não Pago'}</TableCell>
                             </TableRow>
