@@ -14,10 +14,7 @@ export const CreateButton = () => {
     const incomeModalOpen = () => setIncomeOpen(true);
 
     const handleIncomeClose = () => setIncomeOpen(false);
-    const handleExpenseClose = () => {
-        setExpenseOpen(false)
-        window.location.reload();
-    };
+    const handleExpenseClose = () => setExpenseOpen(false);
     return (
         <>
             <SpeedDial

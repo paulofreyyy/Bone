@@ -15,6 +15,7 @@ import { useFetchContas } from "../utils/Contas.hook";
 import { DoughnutChart } from "./charts/DoughnutChart";
 import { DashboardCard } from "./DashboardCard";
 import { DashboardTable } from "./DashboardTable";
+import { useDespesaContext } from "../services/DespesaContext";
 
 
 // Registro dos componentes do ChartJS
@@ -29,6 +30,7 @@ ChartJS.register(
 );
 
 export const DashboardCharts: React.FC = () => {
+    const { despesas } = useDespesaContext();
 
     const { contas, error } = useFetchContas();
     if (error) {
@@ -41,6 +43,7 @@ export const DashboardCharts: React.FC = () => {
     })
 
     const totalDespesasMensais = despesasMesAtual.reduce((acc, conta) => acc + parseFloat(conta.valor), 0);
+
     return (
         <Grid container spacing={5}>
             <Grid item xs={4}>
