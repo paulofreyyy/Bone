@@ -3,6 +3,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import { useState } from "react";
 import { Sidebar } from "../components/Sidebar";
 import { DashboardCharts } from "../components/DashboardCharts";
+import { CreateButton } from "../components/buttons/CreateButton";
 
 export const Dashboard = () => {
     const [isOpen, setIsOpen] = useState(true);
@@ -10,7 +11,6 @@ export const Dashboard = () => {
     const toggleDrawer = () => {
         setIsOpen(!isOpen);
     };
-
 
     return (
 
@@ -47,6 +47,9 @@ export const Dashboard = () => {
                         <DashboardCharts />
                     </Grid>
                 </Grid>
+
+                <CreateButton />
+
             </Container>
         </Box>
     )
