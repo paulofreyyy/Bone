@@ -1,7 +1,9 @@
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import axios from "axios";
+import React, { createContext, useContext, useState, ReactNode, useEffect } from "react";
 
 // Define a estrutura de uma despesa
 interface Despesa {
+    id: number;
     descricao: string;
     isFixa: boolean;
     valor: string;
@@ -38,6 +40,19 @@ export const DespesaProvider: React.FC<DespesaProviderProps> = ({ children }) =>
     const addDespesa = (despesa: Despesa) => {
         setDespesas((prevDespesas) => [...prevDespesas, despesa]);
     };
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get<Despesa[]>('http://localhost:3000/contas');
+                setDespesas(response.data);
+            } catch (error) {
+                console.log('Erro ao buscar os dados');
+            }
+        };
+
+        fetchData();
+    }, []);
 
     return (
         <DespesaContext.Provider value={{ despesas, addDespesa }}>
