@@ -3,7 +3,7 @@ import React from "react";
 import { Bar } from "react-chartjs-2";
 
 interface BarChartProps {
-    contas: {
+    despesas: {
         id: number;
         descricao: string;
         isFixa: boolean;
@@ -13,10 +13,10 @@ interface BarChartProps {
     }[];
 }
 
-export const BarChart: React.FC<BarChartProps> = ({ contas }) => {
+export const BarChart: React.FC<BarChartProps> = ({ despesas }) => {
     const despesasPorMes: { [key: string]: number } = {};
 
-    contas.forEach((conta) => {
+    despesas.forEach((conta) => {
         const mes = new Date(conta.vencimento).toLocaleString('pt-Br', { month: 'long' });
 
         despesasPorMes[mes] = (despesasPorMes[mes] || 0) + parseFloat(conta.valor);

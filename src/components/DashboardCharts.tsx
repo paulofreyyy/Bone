@@ -28,7 +28,6 @@ ChartJS.register(
 
 export const DashboardCharts: React.FC = () => {
     const { despesas } = useDespesaContext();
-    console.log('Despesas atuais:', despesas);
 
     const despesasMesAtual = despesas.filter((despesa) => {
         const vencimento = new Date(despesa.vencimento);
@@ -64,7 +63,7 @@ export const DashboardCharts: React.FC = () => {
             </Grid>
 
             <Grid item xs={8}>
-                <BarChart contas={despesas} />
+                <BarChart despesas={despesas} />
             </Grid>
 
             <Grid item xs={4}>
@@ -73,7 +72,7 @@ export const DashboardCharts: React.FC = () => {
 
             {/* Table */}
             <Grid item xs={12}>
-                <DashboardTable contas={despesas} />
+                <DashboardTable despesas={despesas} />
             </Grid>
         </Grid>
     );

@@ -1,21 +1,22 @@
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow } from "@mui/material"
+import { Paper, styled, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow } from "@mui/material"
 import { useState } from "react";
 import { FormattedNumber, IntlProvider } from "react-intl";
+import { TableActionButtons } from "./buttons/TableActionButtons";
 
-interface Conta {
+interface Despesa {
     id: number;
     descricao: string;
     isFixa: boolean;
     valor: string;
     vencimento: string;
-    pagoEm: string | null;
+    pagoEm: string;
 }
 
 interface DashboardTableProps {
-    contas: Conta[];
+    despesas: Despesa[];
 }
 
-export const DashboardTable: React.FC<DashboardTableProps> = ({ contas }) => {
+export const DashboardTable: React.FC<DashboardTableProps> = ({ despesas }) => {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
 
@@ -28,10 +29,20 @@ export const DashboardTable: React.FC<DashboardTableProps> = ({ contas }) => {
         setPage(0)
     }
 
-    const paginatedContas = contas.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+    const StyledTableRow = styled(TableRow)(({ theme }) => ({
+        '&:nth-of-type(odd)': {
+            backgroundColor: theme.palette.action.hover,
+        },
+        // hide last border
+        '&:last-child td, &:last-child th': {
+            border: 0,
+        },
+    }));
+
+    const paginatedContas = despesas.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
     return (
         <Paper>
-            <TableContainer >
+            <TableContainer>
                 <Table>
                     <TableHead>
                         <TableRow>
@@ -40,22 +51,26 @@ export const DashboardTable: React.FC<DashboardTableProps> = ({ contas }) => {
                             <TableCell>Valor</TableCell>
                             <TableCell>Vencimento</TableCell>
                             <TableCell>Pago em</TableCell>
+                            <TableCell>Ações</TableCell>
                         </TableRow>
                     </TableHead>
 
                     <TableBody>
-                        {paginatedContas.map((conta) => (
-                            <TableRow key={conta.id}>
-                                <TableCell>{conta.id}</TableCell>
-                                <TableCell>{conta.descricao}</TableCell>
+                        {paginatedContas.map((despesa) => (
+                            <StyledTableRow key={despesa.id}>
+                                <TableCell>{despesa.id}</TableCell>
+                                <TableCell>{despesa.descricao}</TableCell>
                                 <TableCell>
                                     <IntlProvider locale="pt-BR">
-                                        <FormattedNumber value={Number(conta.valor)} style="currency" currency="BRL" />
+                                        <FormattedNumber value={Number(despesa.valor)} style="currency" currency="BRL" />
                                     </IntlProvider>
                                 </TableCell>
-                                <TableCell>{conta.vencimento}</TableCell>
-                                <TableCell>{conta.pagoEm ? conta.pagoEm : 'Não Pago'}</TableCell>
-                            </TableRow>
+                                <TableCell>{despesa.vencimento}</TableCell>
+                                <TableCell>{despesa.pagoEm ? despesa.pagoEm : 'Não Pago'}</TableCell>
+                                <TableCell>
+                                    <TableActionButtons despesa={despesa} />
+                                </TableCell>
+                            </StyledTableRow>
                         ))}
                     </TableBody>
                 </Table>
@@ -63,7 +78,7 @@ export const DashboardTable: React.FC<DashboardTableProps> = ({ contas }) => {
             <TablePagination
                 rowsPerPageOptions={[5, 10, 15]}
                 component='div'
-                count={contas.length}
+                count={despesas.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onPageChange={handleChangePage}

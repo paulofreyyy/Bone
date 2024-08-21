@@ -1,9 +1,8 @@
 import axios from "axios";
 import React, { createContext, useContext, useState, ReactNode, useEffect } from "react";
 
-// Define a estrutura de uma despesa
 interface Despesa {
-    id: number;
+    id: number; // Alterado para 'string' para corresponder ao tipo usado no modal
     descricao: string;
     isFixa: boolean;
     valor: string;
@@ -11,16 +10,14 @@ interface Despesa {
     pagoEm: string;
 }
 
-// Define os dados e funções que o contexto vai fornecer
 interface DespesaContextData {
     despesas: Despesa[];
     addDespesa: (despesa: Despesa) => void;
+    updateDespesa: (despesa: Despesa) => void;
 }
 
-// Criação do contexto
 const DespesaContext = createContext<DespesaContextData | undefined>(undefined);
 
-// Hook para consumir o contexto
 export const useDespesaContext = () => {
     const context = useContext(DespesaContext);
     if (!context) {
@@ -29,7 +26,6 @@ export const useDespesaContext = () => {
     return context;
 };
 
-// Provedor que irá encapsular a aplicação e fornecer o contexto
 interface DespesaProviderProps {
     children: ReactNode;
 }
@@ -41,13 +37,21 @@ export const DespesaProvider: React.FC<DespesaProviderProps> = ({ children }) =>
         setDespesas((prevDespesas) => [...prevDespesas, despesa]);
     };
 
+    const updateDespesa = (updatedDespesa: Despesa) => {
+        setDespesas((prevDespesas) =>
+            prevDespesas.map((despesa) =>
+                despesa.id === updatedDespesa.id ? updatedDespesa : despesa
+            )
+        );
+    };
+
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await axios.get<Despesa[]>('http://localhost:3000/contas');
                 setDespesas(response.data);
             } catch (error) {
-                console.log('Erro ao buscar os dados');
+                console.error('Erro ao buscar os dados');
             }
         };
 
@@ -55,7 +59,7 @@ export const DespesaProvider: React.FC<DespesaProviderProps> = ({ children }) =>
     }, []);
 
     return (
-        <DespesaContext.Provider value={{ despesas, addDespesa }}>
+        <DespesaContext.Provider value={{ despesas, addDespesa, updateDespesa }}>
             {children}
         </DespesaContext.Provider>
     );
